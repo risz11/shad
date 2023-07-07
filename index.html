@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shadiya</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/aframe/1.4.2/aframe.min.js"></script>
+</head>
+<body>
+    <style>
+        #panorama-container {
+          position: relative;
+          display: inline-block;
+        }
+      
+        #play-button {
+          position: absolute;
+          top: 10%;
+          right: 10%;
+          padding: 10px 20px;
+          background-color: #000;
+          color: #fff;
+          font-size: 16px;
+          cursor: pointer;
+          opacity: 0.3;
+          border-radius: 50px;
+        }
+      
+        #myAudio {
+          width: 300px;
+          margin-left: 10px;
+          margin-top: 22rem;
+          opacity: 0.2;
+        }
+      </style>
+      
+      <div id="panorama-container">
+        <a-scene>
+          <img id="panorama" src="shadiya.png" />
+          <a-sky src="#panorama" rotation="0 -90 0"></a-sky>
+        </a-scene>
+        <div id="play-button">Play Your Song</div>
+      </div>
+      
+      <audio id="myAudio" controls autoplay loop>
+        <source src="shadiya.mpeg" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+      
+      <script>
+        function createAudioContext() {
+          var context = new (window.AudioContext || window.webkitAudioContext)();
+          return context;
+        }
+      
+        function playAudio() {
+          var audio = document.getElementById('myAudio');
+          audio.play();
+        }
+      
+        window.addEventListener('DOMContentLoaded', function() {
+          var context;
+      
+          function initializeAudio() {
+            if (context) return;
+            context = createAudioContext();
+            playAudio();
+          }
+      
+          var playButton = document.getElementById('play-button');
+          playButton.addEventListener('click', initializeAudio);
+        });
+      </script>
+g      
+      
+   
+</body>
+</html>
